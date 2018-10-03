@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">GitHubRepositoriesApp</string>
+
+    <string name="login_activity_title_text">Github Login</string>
+    <string name="login_hint_text">Login</string>
+    <string name="password_hint_text">Password</string>
+    <string name="login_menu_text">Login</string>
+    <string name="login_button_text">Login</string>
+
+    <string name="repos_activity_title">%s Repositories</string>
+
+    <string name="incorrect_login">Incorrect login.Must be at least 3 character</string>
+    <string name="incorrect_password">Too short password.</string>
+
+    <string name="progress_dialog_text">Loading… Please Wait</string>
+
+    <string name="no_desc_text">No Description</string>
+    <string name="description_repository_name">Repository Name:</string>
+    <string name="description_repository_desc">Description:</string>
+    <string name="stars_text">Stars:</string>
+    <string name="edit_menu_text">Edit</string>
+    <string name="save_menu_text">Save</string>
+    <string name="save_success_message_text">Saved</string>
+    <string name="snackbar_save_action_text">Quit</string>
+    <string name="no_internet_message">No internet connection</string>
+</resources>
