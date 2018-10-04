@@ -38,12 +38,7 @@ public abstract class BaseApiPresenter<T extends BaseView> extends BasePresenter
     }
 
     @Override
-    public void onRepoDeleted(Repository repository) {
-
-    }
-
-    @Override
-    public void onRepoCreated(Repository repository) {
+    public void onRepoDeleted() {
 
     }
 

@@ -6,8 +6,11 @@ import com.fil.githubapiexample.model.User;
 import java.util.List;
 
 import okhttp3.MediaType;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -42,4 +45,8 @@ public interface GithubApiInterface {
     Call<Repository> editRepository(@Path(OWNER) String ownerName,
                                     @Path(NAME) String repositoryName,
                                     @Body Repository repository);
+
+    @DELETE(BASE_URL + REPOS_URL + SEPARATOR + LB + OWNER + RB + SEPARATOR + LB + NAME + RB)
+    Call<ResponseBody> deleteRepository(@Path(OWNER) String ownerName,
+                                        @Path(NAME) String repositoryName);
 }

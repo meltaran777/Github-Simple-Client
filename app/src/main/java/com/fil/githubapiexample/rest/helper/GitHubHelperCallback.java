@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface GitHubHelperCallback {
-
     void onLogin(User user, String authEncode);
+
     void onRepositoriesLoaded(List<Repository> repositories);
-    void onRepoDeleted(Repository repository);
-    void onRepoCreated(Repository repository);
+
+    void onRepoDeleted();
+
     void onRepositoryEdited(Repository newRepository);
 }
 

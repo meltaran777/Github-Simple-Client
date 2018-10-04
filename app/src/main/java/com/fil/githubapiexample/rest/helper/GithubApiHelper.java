@@ -9,6 +9,7 @@ import com.fil.githubapiexample.rest.GithubApiInterface;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,7 +17,9 @@ import retrofit2.Response;
 import static com.fil.githubapiexample.rest.GithubApiInterface.A_COLON;
 import static com.fil.githubapiexample.rest.GithubApiInterface.EMPTY_STR;
 import static com.fil.githubapiexample.rest.GithubApiInterface.NEW_LINE;
+import static com.fil.githubapiexample.rest.helper.GitHubHelperErrorCallback.DELETE_REPOSITORY_ERROR;
 import static com.fil.githubapiexample.rest.helper.GitHubHelperErrorCallback.LOGIN_ERROR;
+import static com.fil.githubapiexample.rest.helper.GitHubHelperErrorCallback.REQUEST_FAILED_ERROR;
 import static com.fil.githubapiexample.rest.helper.GitHubHelperErrorCallback.SAVE_REPOSITORY_ERROR;
 import static com.fil.githubapiexample.rest.helper.GitHubHelperErrorCallback.USER_REPOS_LOAD_ERROR;
 
@@ -54,6 +57,8 @@ public class GithubApiHelper {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 t.printStackTrace();
+                if (gitHubHelperErrorCallback != null)
+                    gitHubHelperErrorCallback.onError(REQUEST_FAILED_ERROR, String.valueOf(t.getLocalizedMessage()));
             }
         });
     }
@@ -80,6 +85,8 @@ public class GithubApiHelper {
             @Override
             public void onFailure(Call<List<Repository>> call, Throwable t) {
                 t.printStackTrace();
+                if (gitHubHelperErrorCallback != null)
+                    gitHubHelperErrorCallback.onError(REQUEST_FAILED_ERROR, String.valueOf(t.getLocalizedMessage()));
             }
         });
     }
@@ -102,6 +109,31 @@ public class GithubApiHelper {
             @Override
             public void onFailure(Call<Repository> call, Throwable t) {
                 t.printStackTrace();
+                if (gitHubHelperErrorCallback != null)
+                    gitHubHelperErrorCallback.onError(REQUEST_FAILED_ERROR, String.valueOf(t.getLocalizedMessage()));
+            }
+        });
+    }
+
+
+    public void deleteRepository(String owner, String oldRepositoryName) {
+        githubApiInterface.deleteRepository(owner, oldRepositoryName).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    if (gitHubHelperCallback != null)
+                        gitHubHelperCallback.onRepoDeleted();
+                } else {
+                    if (gitHubHelperErrorCallback != null)
+                        gitHubHelperErrorCallback.onError(DELETE_REPOSITORY_ERROR, String.valueOf(response.message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+                if (gitHubHelperErrorCallback != null)
+                    gitHubHelperErrorCallback.onError(REQUEST_FAILED_ERROR, String.valueOf(t.getLocalizedMessage()));
             }
         });
     }

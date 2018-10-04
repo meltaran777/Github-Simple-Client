@@ -9,4 +9,6 @@ public interface RepositoriesView extends BaseView {
     void showRepositories(List<Repository> repositories);
 
     void updateItem(Repository repository, int position);
+
+    void deleteItem(int position);
 }

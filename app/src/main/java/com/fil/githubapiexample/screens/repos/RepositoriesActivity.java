@@ -79,6 +79,14 @@ public class RepositoriesActivity extends BaseActivity implements RepositoriesVi
     }
 
     @Override
+    public void deleteItem(int position) {
+        if (mAdapter instanceof RepositoryAdapter) {
+            RepositoryAdapter adapter = (RepositoryAdapter) mAdapter;
+            adapter.remove(position);
+        }
+    }
+
+    @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }

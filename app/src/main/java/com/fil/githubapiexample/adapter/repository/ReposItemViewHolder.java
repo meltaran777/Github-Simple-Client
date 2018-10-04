@@ -51,7 +51,7 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
             popup.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.delete_action:
-
+                        listener.onReposMenuDeleteItemClicked(repository, getAdapterPosition());
                         return true;
                     default:
                         return false;

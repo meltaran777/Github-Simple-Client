@@ -25,7 +25,7 @@ public class RepositoriesPresenter extends BaseReposPresenter<RepositoriesView> 
     private List<Repository> data;
 
     private String login;
-    private int    openItemPosition;
+    private int    openItemPosition, itemToDeletePosition;
 
     public RepositoriesPresenter(Context context, AppHelper appHelper, GithubApiHelper githubApiHelper) {
         super(context, appHelper, githubApiHelper);
@@ -48,15 +48,6 @@ public class RepositoriesPresenter extends BaseReposPresenter<RepositoriesView> 
         }
     }
 
-    public boolean isDataLoaded() {
-        return !data.isEmpty();
-    }
-
-    public void setLogin(Intent intent) {
-        this.login = intent.getStringExtra(Const.LOGIN_EXTRA_KEY);
-        getViewState().setupTitle(context.getString(R.string.repos_activity_title, login));
-    }
-
     @Override
     public void onRepositoriesLoaded(List<Repository> repositories) {
         data = repositories;
@@ -70,8 +61,33 @@ public class RepositoriesPresenter extends BaseReposPresenter<RepositoriesView> 
         getViewState().startRepositoryDetailsActivity(repository);
     }
 
+    @Override
+    public void onReposMenuDeleteItemClicked(Repository repository, int position) {
+        itemToDeletePosition = position;
+        if (networkHelper.isConnected(context)) {
+            getViewState().showProgress();
+            githubApiHelper.deleteRepository(repository.getOwner().getLogin(), repository.getName());
+        } else {
+            getViewState().showSnackbar(context.getString(R.string.no_internet_message), SNACK_DURATION);
+        }
+    }
+
+    @Override
+    public void onRepoDeleted() {
+        getViewState().hideProgress();
+        getViewState().deleteItem(itemToDeletePosition);
+    }
+
+    public void setLogin(Intent intent) {
+        this.login = intent.getStringExtra(Const.LOGIN_EXTRA_KEY);
+        getViewState().setupTitle(context.getString(R.string.repos_activity_title, login));
+    }
+
     public String getLogin() {
         return login;
     }
 
+    private boolean isDataLoaded() {
+        return !data.isEmpty();
+    }
 }
