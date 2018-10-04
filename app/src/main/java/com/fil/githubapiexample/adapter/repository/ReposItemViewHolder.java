@@ -36,6 +36,7 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
             descTextView.setText(description);
         else descTextView.setText(layout.getContext().getString(R.string.no_desc_text));
 
+
         layout.setOnClickListener(view -> {
             long now = System.currentTimeMillis();
             if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
