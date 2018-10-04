@@ -15,7 +15,7 @@ import com.fil.githubapiexample.R;
 import com.fil.githubapiexample.model.Repository;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
 import com.fil.githubapiexample.screens.base.BaseActivity;
-import com.fil.githubapiexample.adapter.repository.ReposAdapter;
+import com.fil.githubapiexample.adapter.repository.RepositoryAdapterImpl;
 import com.fil.githubapiexample.adapter.repository.ReposItemViewHolder;
 import com.fil.githubapiexample.adapter.repository.RepositoryAdapter;
 
@@ -66,7 +66,7 @@ public class RepositoriesActivity extends BaseActivity implements RepositoriesVi
 
     @Override
     public void showRepositories(List<Repository> repositories) {
-        mAdapter = new ReposAdapter(repositories, presenter);
+        mAdapter = new RepositoryAdapterImpl(repositories, presenter);
         recyclerView.setAdapter(mAdapter);
     }
 

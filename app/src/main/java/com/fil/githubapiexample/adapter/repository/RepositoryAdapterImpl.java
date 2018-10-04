@@ -10,13 +10,13 @@ import com.fil.githubapiexample.model.Repository;
 
 import java.util.List;
 
-public class ReposAdapter extends RecyclerView.Adapter<ReposItemViewHolder> implements RepositoryAdapter {
+public class RepositoryAdapterImpl extends RecyclerView.Adapter<ReposItemViewHolder> implements RepositoryAdapter {
 
     private List<Repository> values;
 
     private ReposItemInteractionListener listener;
 
-    public ReposAdapter(List<Repository> data, ReposItemInteractionListener listener) {
+    public RepositoryAdapterImpl(List<Repository> data, ReposItemInteractionListener listener) {
         this.listener = listener;
         values = data;
     }

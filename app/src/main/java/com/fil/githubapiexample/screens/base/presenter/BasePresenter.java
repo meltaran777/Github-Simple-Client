@@ -6,12 +6,13 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.arellomobile.mvp.MvpPresenter;
+import com.arellomobile.mvp.MvpView;
 import com.fil.githubapiexample.helper.AppHelper;
 import com.fil.githubapiexample.helper.NetworkHelper;
 import com.fil.githubapiexample.screens.base.BaseView;
 
 
-public abstract class BasePresenter<T extends BaseView> extends MvpPresenter<T> {
+public abstract class BasePresenter<T extends MvpView> extends MvpPresenter<T> {
 
     protected Context context;
 

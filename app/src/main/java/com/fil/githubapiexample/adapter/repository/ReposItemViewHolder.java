@@ -11,7 +11,7 @@ import com.fil.githubapiexample.util.Utilities;
 
 public class ReposItemViewHolder extends RecyclerView.ViewHolder {
     private static final long CLICK_TIME_INTERVAL = 300;
-    private long mLastClickTime = System.currentTimeMillis();
+    private static       long mLastClickTime      = System.currentTimeMillis();
 
     private View layout;
 

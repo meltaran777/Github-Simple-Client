@@ -1,6 +1,7 @@
 package com.fil.githubapiexample;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Base64;
 
 import com.fil.githubapiexample.helper.AppHelper;
@@ -15,6 +16,8 @@ import static com.fil.githubapiexample.rest.GithubApiInterface.NEW_LINE;
 
 public class MyApplication extends Application {
 
+    private static Context context;
+
     private static AppHelper appHelper;
 
     private static GithubApiClient mGithubApiClient;
@@ -23,10 +26,16 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        context = this.getApplicationContext();
+
         mGithubApiClient = new GithubApiClient();
 
         appHelper = new AppHelper(
                 new NetworkHelper(), new ValidateHelper(), new StringHelper());
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     public static AppHelper getAppHelper() {
