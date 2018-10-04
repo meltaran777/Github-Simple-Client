@@ -43,21 +43,26 @@
             app:layout_constraintStart_toStartOf="@+id/repo_name_text_view"
             app:layout_constraintTop_toBottomOf="@+id/repo_name_text_view" />
 
-        <ImageView
-            android:id="@+id/repo_menu_image_view"
+        <TextView
+            android:id="@+id/repo_menu_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:text="@string/menu_vertical_dots_text"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_menu" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Barrier
             android:id="@+id/barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="start"
-            app:constraint_referenced_ids="repo_menu_image_view" />
+            app:constraint_referenced_ids="repo_menu_text_view" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
