@@ -32,17 +32,17 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
 
         String description = repository.getDescription();
 
-        if (Utilities.isValidString(description))
-            descTextView.setText(description);
-        else descTextView.setText(layout.getContext().getString(R.string.no_desc_text));
+        //if (Utilities.isValidString(description))
+        //    descTextView.setText(description);
+        //else descTextView.setText(layout.getContext().getString(R.string.no_desc_text));
 
         layout.setOnClickListener(view -> {
             long now = System.currentTimeMillis();
             if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
                 return;
             }
-            //mLastClickTime = now;
-            //listener.onReposItemClicked(repository, getAdapterPosition());
+            mLastClickTime = now;
+            listener.onReposItemClicked(repository, getAdapterPosition());
         });
 
         menuTextView.setOnClickListener(view -> {
