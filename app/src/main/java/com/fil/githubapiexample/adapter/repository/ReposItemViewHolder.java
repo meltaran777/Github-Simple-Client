@@ -28,7 +28,7 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindViews(Repository repository, ReposItemInteractionListener listener) {
-/*        nameTextView.setText(repository.getName());
+        nameTextView.setText(repository.getName());
 
         String description = repository.getDescription();
 
@@ -58,6 +58,6 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
                 }
             });
             popup.show();
-        });*/
+        });
     }
 }
