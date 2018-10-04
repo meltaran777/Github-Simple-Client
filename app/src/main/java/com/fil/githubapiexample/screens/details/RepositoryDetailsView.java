@@ -2,7 +2,9 @@ package com.fil.githubapiexample.screens.details;
 
 import android.graphics.Bitmap;
 
-import com.fil.githubapiexample.screens.base.BaseView;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
+import com.fil.githubapiexample.base.BaseView;
 
 public interface RepositoryDetailsView extends BaseView {
     void showOwnerAvatar(Bitmap avatarBitmap);

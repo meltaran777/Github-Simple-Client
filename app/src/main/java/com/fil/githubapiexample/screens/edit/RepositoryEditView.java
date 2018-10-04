@@ -1,9 +1,9 @@
 package com.fil.githubapiexample.screens.edit;
 
-import android.graphics.Bitmap;
-
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.fil.githubapiexample.model.Repository;
-import com.fil.githubapiexample.screens.base.BaseView;
+import com.fil.githubapiexample.base.BaseView;
 
 public interface RepositoryEditView extends BaseView {
     void showRepositoryName(String repositoryName);

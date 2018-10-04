@@ -15,9 +15,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.fil.githubapiexample.MyApplication;
 import com.fil.githubapiexample.R;
-import com.fil.githubapiexample.helper.ValidateHelper;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
-import com.fil.githubapiexample.screens.base.BaseActivity;
+import com.fil.githubapiexample.base.BaseActivity;
 
 public class LoginActivity extends BaseActivity implements LoginView {
 
@@ -78,12 +77,14 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 supportInvalidateOptionsMenu();
             }
         });
+
         loginButon.setOnClickListener(view -> presenter.login(getLogin(), getPassword()));
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.login_action).setEnabled(presenter.isValidForm(getLogin(), getPassword()));
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.login_menu, menu);
         return true;
     }
 
@@ -100,9 +101,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.login_menu, menu);
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.login_action).setEnabled(presenter.isValidForm(getLogin(), getPassword()));
         return true;
     }
 

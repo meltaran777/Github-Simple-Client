@@ -3,8 +3,12 @@ package com.fil.githubapiexample.screens.repos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -14,18 +18,18 @@ import com.fil.githubapiexample.MyApplication;
 import com.fil.githubapiexample.R;
 import com.fil.githubapiexample.model.Repository;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
-import com.fil.githubapiexample.screens.base.BaseActivity;
-import com.fil.githubapiexample.adapter.repository.RepositoryAdapterImpl;
-import com.fil.githubapiexample.adapter.repository.ReposItemViewHolder;
+import com.fil.githubapiexample.base.BaseActivity;
 import com.fil.githubapiexample.adapter.repository.RepositoryAdapter;
 
 import java.util.List;
 
 public class RepositoriesActivity extends BaseActivity implements RepositoriesView {
 
-    private RecyclerView                              recyclerView;
-    private RecyclerView.Adapter<ReposItemViewHolder> mAdapter;
-    private RecyclerView.LayoutManager                layoutManager;
+    private RecyclerView               recyclerView;
+    private RepositoryAdapter          mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private ProgressBar progressBar;
 
@@ -45,11 +49,17 @@ public class RepositoriesActivity extends BaseActivity implements RepositoriesVi
 
         progressBar = findViewById(R.id.recycler_progress_bar);
         recyclerView = findViewById(R.id.repo_recycler_view);
+        swipeRefreshLayout = findViewById(R.id.swipe_to_refresh);
 
         layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new RepositoryAdapter(presenter.getData(), presenter);
+        recyclerView.setAdapter(mAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.refresh());
     }
 
     @Override
@@ -60,40 +70,62 @@ public class RepositoriesActivity extends BaseActivity implements RepositoriesVi
     }
 
     @Override
-    public void onDataChanged(Intent data) {
-        presenter.updateUi(data);
+    protected void onDestroy() {
+        mAdapter.setListener(null);
+        super.onDestroy();
     }
 
     @Override
-    public void showRepositories(List<Repository> repositories) {
-        mAdapter = new RepositoryAdapterImpl(repositories, presenter);
-        recyclerView.setAdapter(mAdapter);
+    public void onDataChanged(Intent data) {
+        presenter.updateItem(data);
+    }
+
+    @Override
+    public void onRepositoriesLoaded(List<Repository> repositories) {
+        mAdapter.setValues(repositories);
     }
 
     @Override
     public void updateItem(Repository repository, int position) {
-        if (mAdapter instanceof RepositoryAdapter) {
-            RepositoryAdapter adapter = (RepositoryAdapter) mAdapter;
-            adapter.update(position, repository);
-        }
+        mAdapter.update(position, repository);
     }
 
     @Override
     public void deleteItem(int position) {
-        if (mAdapter instanceof RepositoryAdapter) {
-            RepositoryAdapter adapter = (RepositoryAdapter) mAdapter;
-            adapter.remove(position);
-        }
+        mAdapter.remove(position);
     }
 
     @Override
     public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideProgress() {
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setEnabled(false);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.repository_list_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refresh_action:
+                presenter.refresh();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
     @NonNull

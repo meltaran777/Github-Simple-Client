@@ -1,4 +1,4 @@
-package com.fil.githubapiexample.screens.base.presenter;
+package com.fil.githubapiexample.base.presenter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import com.fil.githubapiexample.helper.AppHelper;
 import com.fil.githubapiexample.model.Repository;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
-import com.fil.githubapiexample.screens.base.BaseView;
+import com.fil.githubapiexample.base.BaseView;
 import com.fil.githubapiexample.util.Const;
 
 public abstract class BaseReposPresenter<T extends BaseView> extends BaseApiPresenter<T> {

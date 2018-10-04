@@ -8,9 +8,9 @@ import com.fil.githubapiexample.helper.AppHelper;
 import com.fil.githubapiexample.helper.ValidateHelper;
 import com.fil.githubapiexample.model.User;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
-import com.fil.githubapiexample.screens.base.presenter.BaseApiPresenter;
+import com.fil.githubapiexample.base.presenter.BaseApiPresenter;
 
-import static com.fil.githubapiexample.screens.base.BaseView.SNACK_DURATION;
+import static com.fil.githubapiexample.base.BaseView.SNACK_DURATION;
 
 @InjectViewState
 public class LoginPresenter extends BaseApiPresenter<LoginView> {

@@ -10,7 +10,7 @@ import com.fil.githubapiexample.model.Repository;
 import com.fil.githubapiexample.util.Utilities;
 
 public class ReposItemViewHolder extends RecyclerView.ViewHolder {
-    private static final long CLICK_TIME_INTERVAL = 300;
+    private static final long CLICK_TIME_INTERVAL = 1000;
     private static       long mLastClickTime      = System.currentTimeMillis();
 
     private View layout;
@@ -35,7 +35,6 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
         if (Utilities.isValidString(description))
             descTextView.setText(description);
         else descTextView.setText(layout.getContext().getString(R.string.no_desc_text));
-
 
         layout.setOnClickListener(view -> {
             long now = System.currentTimeMillis();

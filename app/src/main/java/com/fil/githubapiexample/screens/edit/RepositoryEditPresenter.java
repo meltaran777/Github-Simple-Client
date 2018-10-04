@@ -1,8 +1,6 @@
 package com.fil.githubapiexample.screens.edit;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -10,11 +8,9 @@ import com.fil.githubapiexample.R;
 import com.fil.githubapiexample.helper.AppHelper;
 import com.fil.githubapiexample.model.Repository;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
-import com.fil.githubapiexample.screens.base.presenter.BaseReposPresenter;
-import com.fil.githubapiexample.screens.base.Router;
-import com.fil.githubapiexample.util.Const;
+import com.fil.githubapiexample.base.presenter.BaseReposPresenter;
 
-import static com.fil.githubapiexample.screens.base.BaseView.SNACK_DURATION;
+import static com.fil.githubapiexample.base.BaseView.SNACK_DURATION;
 
 @InjectViewState
 public class RepositoryEditPresenter extends BaseReposPresenter<RepositoryEditView> {

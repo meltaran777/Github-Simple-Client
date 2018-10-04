@@ -25,4 +25,6 @@
     <string name="no_internet_message">No internet connection</string>
     <string name="delete_menu_text">Delete</string>
     <string name="menu_vertical_dots_text">⋮</string>
+    <string name="no_repository_text">No Repository</string>
+    <string name="refresh_menu_text">Refresh</string>
 </resources>

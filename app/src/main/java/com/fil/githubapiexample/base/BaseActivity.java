@@ -1,4 +1,4 @@
-package com.fil.githubapiexample.screens.base;
+package com.fil.githubapiexample.base;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,19 +12,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.fil.githubapiexample.dialogs.ProgressDialog;
-import com.fil.githubapiexample.helper.AppHelper;
-import com.fil.githubapiexample.helper.NetworkHelper;
-import com.fil.githubapiexample.helper.StringHelper;
-import com.fil.githubapiexample.helper.ValidateHelper;
 import com.fil.githubapiexample.model.Repository;
 import com.fil.githubapiexample.screens.details.RepositoryDetailsActivity;
 import com.fil.githubapiexample.screens.edit.EditReposActivity;
 import com.fil.githubapiexample.screens.repos.RepositoriesActivity;
 import com.fil.githubapiexample.util.Const;
-
-import java.util.Objects;
 
 public abstract class BaseActivity extends MvpAppCompatActivity implements BaseView, IBaseActivity, RouterCallbacks {
     @NonNull

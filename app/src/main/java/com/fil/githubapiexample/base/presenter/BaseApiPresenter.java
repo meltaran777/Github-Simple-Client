@@ -1,4 +1,4 @@
-package com.fil.githubapiexample.screens.base.presenter;
+package com.fil.githubapiexample.base.presenter;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import com.fil.githubapiexample.model.User;
 import com.fil.githubapiexample.rest.helper.GitHubHelperCallback;
 import com.fil.githubapiexample.rest.helper.GitHubHelperErrorCallback;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
-import com.fil.githubapiexample.screens.base.BaseView;
+import com.fil.githubapiexample.base.BaseView;
 
 import java.util.List;
 

@@ -1,11 +1,8 @@
-package com.fil.githubapiexample.screens.base;
+package com.fil.githubapiexample.base;
 
-import android.content.Intent;
-import android.support.annotation.StringRes;
 import android.view.View;
 
 import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 

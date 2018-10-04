@@ -17,8 +17,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.fil.githubapiexample.MyApplication;
 import com.fil.githubapiexample.R;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
-import com.fil.githubapiexample.screens.base.BaseActivity;
-import com.fil.githubapiexample.screens.base.Router;
+import com.fil.githubapiexample.base.BaseActivity;
+import com.fil.githubapiexample.base.Router;
 
 public class RepositoryDetailsActivity extends BaseActivity implements RepositoryDetailsView {
 

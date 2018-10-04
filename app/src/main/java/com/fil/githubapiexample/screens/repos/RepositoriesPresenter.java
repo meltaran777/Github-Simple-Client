@@ -2,22 +2,20 @@ package com.fil.githubapiexample.screens.repos;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.fil.githubapiexample.R;
 import com.fil.githubapiexample.helper.AppHelper;
 import com.fil.githubapiexample.model.Repository;
 import com.fil.githubapiexample.rest.helper.GithubApiHelper;
-import com.fil.githubapiexample.screens.base.presenter.BaseReposPresenter;
-import com.fil.githubapiexample.screens.base.BaseView;
+import com.fil.githubapiexample.base.presenter.BaseReposPresenter;
 import com.fil.githubapiexample.adapter.repository.ReposItemInteractionListener;
 import com.fil.githubapiexample.util.Const;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fil.githubapiexample.screens.base.BaseView.SNACK_DURATION;
+import static com.fil.githubapiexample.base.BaseView.SNACK_DURATION;
 
 @InjectViewState
 public class RepositoriesPresenter extends BaseReposPresenter<RepositoriesView> implements ReposItemInteractionListener {
@@ -32,26 +30,34 @@ public class RepositoriesPresenter extends BaseReposPresenter<RepositoriesView> 
         data = new ArrayList<>();
     }
 
-    public void updateUi(Intent data) {
+    public void updateItem(Intent data) {
         setRepository(data);
         getViewState().updateItem(repository, openItemPosition);
     }
 
     public void loadRepositories() {
         if (!isDataLoaded()) {
-            if (networkHelper.isConnected(context)) {
-                getViewState().showProgress();
-                githubApiHelper.loadRepositories();
-            } else {
-                getViewState().showSnackbar(context.getString(R.string.no_internet_message), SNACK_DURATION);
-            }
+            loadData();
+        }
+    }
+
+    public void refresh() {
+        loadData();
+    }
+
+    private void loadData() {
+        if (networkHelper.isConnected(context)) {
+            getViewState().showProgress();
+            githubApiHelper.loadRepositories();
+        } else {
+            getViewState().showSnackbar(context.getString(R.string.no_internet_message), SNACK_DURATION);
         }
     }
 
     @Override
     public void onRepositoriesLoaded(List<Repository> repositories) {
         data = repositories;
-        getViewState().showRepositories(repositories);
+        getViewState().onRepositoriesLoaded(repositories);
         getViewState().hideProgress();
     }
 
@@ -83,6 +89,10 @@ public class RepositoriesPresenter extends BaseReposPresenter<RepositoriesView> 
         getViewState().setupTitle(context.getString(R.string.repos_activity_title, login));
     }
 
+    public List<Repository> getData() {
+        return data;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -90,4 +100,5 @@ public class RepositoriesPresenter extends BaseReposPresenter<RepositoriesView> 
     private boolean isDataLoaded() {
         return !data.isEmpty();
     }
+
 }

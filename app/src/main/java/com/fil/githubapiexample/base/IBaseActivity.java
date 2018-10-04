@@ -1,4 +1,4 @@
-package com.fil.githubapiexample.screens.base;
+package com.fil.githubapiexample.base;
 
 import android.support.annotation.StringRes;
 
