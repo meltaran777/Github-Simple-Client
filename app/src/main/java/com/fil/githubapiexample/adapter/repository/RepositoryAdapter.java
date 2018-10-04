@@ -34,7 +34,6 @@ public class RepositoryAdapter extends RecyclerView.Adapter<ReposItemViewHolder>
     @Override
     public void onBindViewHolder(ReposItemViewHolder holder, final int position) {
         final Repository repository = values.get(position);
-        Log.d("DebugAdapter", "bind, position = " + position);
         holder.bindViews(repository, listener);
     }
 
