@@ -41,8 +41,8 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
             if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
                 return;
             }
-            mLastClickTime = now;
-            listener.onReposItemClicked(repository, getAdapterPosition());
+            //mLastClickTime = now;
+            //listener.onReposItemClicked(repository, getAdapterPosition());
         });
 
         menuTextView.setOnClickListener(view -> {
