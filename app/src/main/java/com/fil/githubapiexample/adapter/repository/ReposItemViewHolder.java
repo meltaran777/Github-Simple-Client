@@ -28,13 +28,13 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindViews(Repository repository, ReposItemInteractionListener listener) {
-        nameTextView.setText(repository.getName());
+/*        nameTextView.setText(repository.getName());
 
         String description = repository.getDescription();
 
-        //if (Utilities.isValidString(description))
-        //    descTextView.setText(description);
-        //else descTextView.setText(layout.getContext().getString(R.string.no_desc_text));
+        if (Utilities.isValidString(description))
+            descTextView.setText(description);
+        else descTextView.setText(layout.getContext().getString(R.string.no_desc_text));
 
         layout.setOnClickListener(view -> {
             long now = System.currentTimeMillis();
@@ -58,6 +58,6 @@ public class ReposItemViewHolder extends RecyclerView.ViewHolder {
                 }
             });
             popup.show();
-        });
+        });*/
     }
 }
