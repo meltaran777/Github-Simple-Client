@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -29,9 +30,10 @@ public class RepositoriesActivity extends BaseActivity implements RepositoriesVi
     private RepositoryAdapter          mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView noRepositoryTextView;
 
-    private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar        progressBar;
 
     @InjectPresenter
     RepositoriesPresenter presenter;
@@ -50,6 +52,7 @@ public class RepositoriesActivity extends BaseActivity implements RepositoriesVi
         progressBar = findViewById(R.id.recycler_progress_bar);
         recyclerView = findViewById(R.id.repo_recycler_view);
         swipeRefreshLayout = findViewById(R.id.swipe_to_refresh);
+        noRepositoryTextView = findViewById(R.id.no_repository_text_view);
 
         layoutManager = new LinearLayoutManager(this);
 
@@ -93,6 +96,11 @@ public class RepositoriesActivity extends BaseActivity implements RepositoriesVi
     @Override
     public void deleteItem(int position) {
         mAdapter.remove(position);
+    }
+
+    @Override
+    public void setNoRepositoryTextViewVisibility(int visibility) {
+        noRepositoryTextView.setVisibility(visibility);
     }
 
     @Override

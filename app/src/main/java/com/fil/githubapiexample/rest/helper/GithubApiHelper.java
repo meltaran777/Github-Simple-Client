@@ -7,6 +7,7 @@ import com.fil.githubapiexample.model.User;
 import com.fil.githubapiexample.rest.GithubApiClient;
 import com.fil.githubapiexample.rest.GithubApiInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;

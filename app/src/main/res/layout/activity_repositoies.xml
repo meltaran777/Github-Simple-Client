@@ -7,7 +7,7 @@
     tools:context="com.fil.githubapiexample.screens.repos.RepositoriesActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/no_repository_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_repository_text"
@@ -21,7 +21,11 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_to_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/repo_recycler_view"

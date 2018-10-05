@@ -2,6 +2,7 @@ package com.fil.githubapiexample.screens.repos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.fil.githubapiexample.R;
@@ -57,8 +58,11 @@ public class RepositoriesPresenter extends BaseReposPresenter<RepositoriesView> 
     @Override
     public void onRepositoriesLoaded(List<Repository> repositories) {
         data = repositories;
-        getViewState().onRepositoriesLoaded(repositories);
         getViewState().hideProgress();
+        if (isDataLoaded()) {
+            getViewState().setNoRepositoryTextViewVisibility(View.GONE);
+            getViewState().onRepositoriesLoaded(repositories);
+        } else getViewState().setNoRepositoryTextViewVisibility(View.VISIBLE);
     }
 
     @Override
