@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fil.githubapiexample.screens.repos.RepositoriesActivity">
+    tools:context="com.fil.github_client.screens.repositories.RepositoriesActivity">
 
     <TextView
         android:id="@+id/no_repository_text_view"

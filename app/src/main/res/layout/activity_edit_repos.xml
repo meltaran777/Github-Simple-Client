@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fil.githubapiexample.screens.edit.EditReposActivity">
+    tools:context="com.fil.github_client.screens.edit.EditReposActivity">
 
     <TextView
         android:id="@+id/textView3"
