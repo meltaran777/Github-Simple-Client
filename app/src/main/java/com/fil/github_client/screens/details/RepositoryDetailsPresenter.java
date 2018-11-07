@@ -28,7 +28,11 @@ public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<Reposito
         this.imageLoader = appHelper.getImageLoader();
     }
 
-    public void initUi() {
+    public void initUi(Intent data) {
+        boolean isInited = gitRepository != null;
+        if (!isInited) {
+            setGitRepository(data);
+        }
         initToolbar(gitRepository);
         initViews(gitRepository);
         loadAvatarImage(gitRepository);
@@ -45,8 +49,8 @@ public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<Reposito
     }
 
     private void updateUi(GitRepository gitRepository) {
-        initViews(gitRepository);
         initToolbar(gitRepository);
+        initViews(gitRepository);
     }
 
     private void initToolbar(GitRepository gitRepository) {

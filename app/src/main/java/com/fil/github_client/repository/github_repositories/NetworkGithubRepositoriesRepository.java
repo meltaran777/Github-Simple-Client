@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class NetworkGithubRepositoriesRepository extends NetworkGithubRepository implements GithubRepositoriesRepository {
 
@@ -31,9 +32,9 @@ public class NetworkGithubRepositoriesRepository extends NetworkGithubRepository
     }
 
     @Override
-    public Observable<ResponseBody> deleteRepository(String owner, String oldRepositoryName) {
+    public Observable<Response<Void>> deleteRepository(String owner, String repositoryName) {
         return githubApiInterface
-                .deleteRepository(owner, oldRepositoryName)
+                .deleteRepository(owner, repositoryName)
                 .compose(appHelper.getRxHelper().async());
     }
 }

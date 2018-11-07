@@ -6,6 +6,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 
 public interface GithubRepositoriesRepository {
@@ -13,5 +14,5 @@ public interface GithubRepositoriesRepository {
 
     Observable<GitRepository> editRepository(String owner, String oldRepositoryName, GitRepository newGitRepository);
 
-    Observable<ResponseBody> deleteRepository(String owner, String oldRepositoryName);
+    Observable<Response<Void>> deleteRepository(String owner, String oldRepositoryName);
 }

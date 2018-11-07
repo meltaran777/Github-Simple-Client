@@ -63,7 +63,7 @@ public class RepositoriesPresenter
         getViewState().hideProgress();
         if (isDataLoaded()) {
             getViewState().setNoRepositoryTextViewVisibility(View.GONE);
-            getViewState().onRepositoriesLoaded(repositories);
+            getViewState().showRepositories(repositories);
         } else getViewState().setNoRepositoryTextViewVisibility(View.VISIBLE);
     }
 

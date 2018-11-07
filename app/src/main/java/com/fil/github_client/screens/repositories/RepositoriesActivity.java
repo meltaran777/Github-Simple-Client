@@ -73,11 +73,7 @@ public class RepositoriesActivity extends ActivityScreenView implements Reposito
         recyclerView.setAdapter(mAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(() -> presenter.refresh());
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         presenter.setLogin(getIntent());
         presenter.loadRepositories();
     }
@@ -101,7 +97,7 @@ public class RepositoriesActivity extends ActivityScreenView implements Reposito
     }
 
     @Override
-    public void onRepositoriesLoaded(List<GitRepository> repositories) {
+    public void showRepositories(List<GitRepository> repositories) {
         mAdapter.setValues(repositories);
     }
 

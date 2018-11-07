@@ -60,8 +60,7 @@ public class RepositoryDetailsActivity extends ActivityScreenView implements Rep
         repoNameTextView = findViewById(R.id.repo_name_text_view);
         repoDescTextView = findViewById(R.id.desc_full_text_view);
 
-        presenter.setGitRepository(getIntent());
-        presenter.initUi();
+        presenter.initUi(getIntent());
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -47,6 +48,6 @@ public interface GithubApiInterface {
                                              @Body GitRepository gitRepository);
 
     @DELETE(BASE_URL + REPOS_URL + SEPARATOR + LB + OWNER + RB + SEPARATOR + LB + NAME + RB)
-    Observable<ResponseBody> deleteRepository(@Path(OWNER) String ownerName,
-                                        @Path(NAME) String repositoryName);
+    Observable<Response<Void>> deleteRepository(@Path(OWNER) String ownerName,
+                                                @Path(NAME) String repositoryName);
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
@@ -21,6 +22,7 @@ public interface ScreenView extends MvpView, ToolbarView{
 
     void hideProgress();
 
+    @StateStrategyType(AddToEndSingleStrategy.class)
     void setViewResult(int resultCode, Intent data);
 
     void hideView(int resultCode, Intent data);

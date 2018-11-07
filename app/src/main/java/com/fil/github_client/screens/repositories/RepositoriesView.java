@@ -9,7 +9,7 @@ import java.util.List;
 
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface RepositoriesView extends ScreenView {
-    void onRepositoriesLoaded(List<GitRepository> repositories);
+    void showRepositories(List<GitRepository> repositories);
 
     void setNoRepositoryTextViewVisibility(int visibility);
 
