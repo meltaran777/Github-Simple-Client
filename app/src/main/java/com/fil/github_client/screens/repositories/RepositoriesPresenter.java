@@ -5,31 +5,39 @@ import android.content.Intent;
 import android.view.View;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.fil.github_client.MyApplication;
 import com.fil.github_client.R;
-import com.fil.github_client.helper.AppHelper;
-import com.fil.github_client.model.GitRepository;
 import com.fil.github_client.base.presenter.BaseRepositoryPresenter;
-import com.fil.github_client.screens.repositories.adapter.RepositoryListItemInteractionListener;
+import com.fil.github_client.helper.NetworkHelper;
+import com.fil.github_client.model.GitRepository;
 import com.fil.github_client.repository.github_repositories.GithubRepositoriesInteraction;
+import com.fil.github_client.screens.repositories.adapter.RepositoryListItemInteractionListener;
 import com.fil.github_client.util.Const;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import static com.fil.github_client.base.ScreenView.SNACK_DURATION;
 
 @InjectViewState
-public class RepositoriesPresenter
-        extends BaseRepositoryPresenter<RepositoriesView>
-        implements RepositoryListItemInteractionListener {
+public class RepositoriesPresenter extends BaseRepositoryPresenter<RepositoriesView> implements RepositoryListItemInteractionListener {
+
+    @Inject Context       context;
+    @Inject NetworkHelper networkHelper;
+
+    @Inject GithubRepositoriesInteraction interaction;
 
     private List<GitRepository> data;
 
     private String login;
     private int    openItemPosition, itemToDeletePosition;
 
-    public RepositoriesPresenter(Context context, GithubRepositoriesInteraction repositoriesInteraction, AppHelper appHelper) {
-        super(context, repositoriesInteraction, appHelper);
+    public RepositoriesPresenter() {
+        MyApplication.getAppComponent().inject(this);
+        interaction.setListener(this);
+        interaction.getErrorResponseHandler().subscribe(this);
         data = new ArrayList<>();
     }
 
@@ -94,6 +102,13 @@ public class RepositoriesPresenter
         } else {
             getViewState().showSnackbar(context.getString(R.string.no_internet_message), SNACK_DURATION);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        interaction.getErrorResponseHandler().unsubscribe(this);
+        interaction.destroy();
     }
 
     public List<GitRepository> getData() {

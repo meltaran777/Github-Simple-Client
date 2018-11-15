@@ -17,17 +17,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 @Module
-class AppHelperModule {
+public class AppHelperModule {
     @Provides
     @Singleton
     public AppHelper provideAppHelper(RxHelper rxHelper,
                                       NetworkHelper networkHelper,
                                       ValidateHelper validateHelper,
                                       StringHelper stringHelper,
-                                      ImageLoader imageLoader,
-                                      ErrorResponseHandler errorResponseHandler) {
+                                      ImageLoader imageLoader) {
         return new AppHelper(rxHelper,networkHelper,validateHelper,
-                stringHelper,imageLoader,errorResponseHandler);
+                stringHelper,imageLoader);
     }
 
     @Provides
@@ -58,10 +57,5 @@ class AppHelperModule {
     @Singleton
     public ImageLoader provideImageLoader(){
         return new PicassoImageLoader();
-    }
-
-    @Provides
-    public ErrorResponseHandler provideErrorResponseHandler(){
-        return new ErrorResponseHandler();
     }
 }

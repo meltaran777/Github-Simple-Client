@@ -6,25 +6,31 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.fil.github_client.MyApplication;
 import com.fil.github_client.R;
-import com.fil.github_client.helper.AppHelper;
+import com.fil.github_client.base.presenter.BaseRepositoryPresenter;
+import com.fil.github_client.helper.StringHelper;
 import com.fil.github_client.helper.image_loader.ImageLoader;
 import com.fil.github_client.helper.image_loader.Target;
 import com.fil.github_client.model.GitRepository;
-import com.fil.github_client.base.presenter.BaseRepositoryPresenter;
 import com.fil.github_client.repository.github_repositories.GithubRepositoriesInteraction;
+
+import javax.inject.Inject;
 
 
 @InjectViewState
 public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<RepositoryDetailsView> {
 
-    ImageLoader imageLoader;
+    @Inject Context      context;
+    @Inject ImageLoader  imageLoader;
+    @Inject StringHelper stringHelper;
 
-    public RepositoryDetailsPresenter(Context context,
-                                      GithubRepositoriesInteraction githubRepositoriesInteraction,
-                                      AppHelper appHelper) {
-        super(context, githubRepositoriesInteraction, appHelper);
-        this.imageLoader = appHelper.getImageLoader();
+    @Inject GithubRepositoriesInteraction repositoriesInteraction;
+
+    public RepositoryDetailsPresenter() {
+        MyApplication.getAppComponent().inject(this);
+        repositoriesInteraction.setListener(this);
+        repositoriesInteraction.getErrorResponseHandler().subscribe(this);
     }
 
     public void initUi(Intent data) {
@@ -61,7 +67,7 @@ public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<Reposito
         getViewState().showRepositoryName(gitRepository.getName());
 
         String description = gitRepository.getDescription();
-        if (!appHelper.getStringHelper().isValidString(description))
+        if (!stringHelper.isValidString(description))
             description = context.getString(R.string.no_desc_text);
         getViewState().showRepositoryDescription(description);
 
@@ -86,5 +92,12 @@ public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<Reposito
                 getViewState().showAvatarProgress();
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        repositoriesInteraction.getErrorResponseHandler().unsubscribe(this);
+        repositoriesInteraction.destroy();
     }
 }

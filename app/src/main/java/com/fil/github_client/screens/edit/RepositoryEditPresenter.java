@@ -6,12 +6,16 @@ import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.fil.github_client.MyApplication;
 import com.fil.github_client.R;
 import com.fil.github_client.helper.AppHelper;
+import com.fil.github_client.helper.NetworkHelper;
 import com.fil.github_client.model.GitRepository;
 import com.fil.github_client.base.presenter.BaseRepositoryPresenter;
 import com.fil.github_client.repository.github_repositories.GithubRepositoriesInteraction;
 import com.fil.github_client.util.Const;
+
+import javax.inject.Inject;
 
 import static com.fil.github_client.base.ScreenView.SNACK_DURATION;
 
@@ -20,10 +24,15 @@ public class RepositoryEditPresenter extends BaseRepositoryPresenter<RepositoryE
 
     private boolean isViewCreated = false;
 
-    public RepositoryEditPresenter(Context context,
-                                   GithubRepositoriesInteraction repositoriesInteraction,
-                                   AppHelper appHelper) {
-        super(context, repositoriesInteraction, appHelper);
+    @Inject Context       context;
+    @Inject NetworkHelper networkHelper;
+
+    @Inject GithubRepositoriesInteraction repositoriesInteraction;
+
+    public RepositoryEditPresenter(){
+        MyApplication.getAppComponent().inject(this);
+        repositoriesInteraction.setListener(this);
+        repositoriesInteraction.getErrorResponseHandler().subscribe(this);
     }
 
     public void init(GitRepository gitRepository) {
@@ -53,7 +62,7 @@ public class RepositoryEditPresenter extends BaseRepositoryPresenter<RepositoryE
         gitRepository.setDescription(description);
 
         if (networkHelper.isConnected(context)) {
-            interaction.editRepository(oldName, gitRepository);
+            repositoriesInteraction.editRepository(oldName, gitRepository);
         } else {
             getViewState().hideKeyboard();
             getViewState().showSnackbar(context.getString(R.string.no_internet_message), SNACK_DURATION);
@@ -73,5 +82,12 @@ public class RepositoryEditPresenter extends BaseRepositoryPresenter<RepositoryE
                 Snackbar.LENGTH_INDEFINITE,
                 context.getString(R.string.snackbar_save_action_text),
                 (view) -> getViewState().hideView());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        repositoriesInteraction.getErrorResponseHandler().unsubscribe(this);
+        repositoriesInteraction.destroy();
     }
 }

@@ -33,17 +33,6 @@ public class LoginActivity extends ActivityScreenView implements LoginView {
     @InjectPresenter
     LoginPresenter presenter;
 
-    @ProvidePresenter
-    LoginPresenter provideLoginPresenter() {
-        GithubUserInteraction githubUserInteractor = new GithubUserInteraction(
-                MyApplication.getGithubUserRepository(),
-                new ErrorResponseHandler());
-
-        AppHelper appHelper = MyApplication.getAppHelper();
-
-        return new LoginPresenter(this.getApplicationContext(), githubUserInteractor, appHelper);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

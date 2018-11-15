@@ -1,21 +1,22 @@
 package com.fil.github_client.repository;
 
+import com.fil.github_client.MyApplication;
 import com.fil.github_client.network.ErrorResponseHandler;
+
+import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BaseInteraction<L extends InteractionListener> {
+public class BaseInteraction {
 
-    public L listener;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    protected final CompositeDisposable compositeDisposable;
+    @Inject
+    ErrorResponseHandler errorResponseHandler;
 
-    protected final ErrorResponseHandler errorResponseHandler;
-
-    public BaseInteraction(final ErrorResponseHandler errorResponseHandler) {
-        this.errorResponseHandler = errorResponseHandler;
-        compositeDisposable = new CompositeDisposable();
+    public BaseInteraction() {
+        MyApplication.getAppComponent().inject(this);
     }
 
     public void addDisposable(final Disposable disposable) {
@@ -23,19 +24,10 @@ public abstract class BaseInteraction<L extends InteractionListener> {
     }
 
     public void destroy() {
-        listener = null;
         compositeDisposable.dispose();
     }
 
     public ErrorResponseHandler getErrorResponseHandler() {
         return errorResponseHandler;
-    }
-
-    public L getListener() {
-        return listener;
-    }
-
-    public void setListener(L listener) {
-        this.listener = listener;
     }
 }

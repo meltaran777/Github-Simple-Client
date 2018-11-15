@@ -18,16 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.fil.github_client.MyApplication;
 import com.fil.github_client.R;
-import com.fil.github_client.base.adapter.RecyclerAdapter;
-import com.fil.github_client.base.RepositoryViewController;
-import com.fil.github_client.base.back_stack.BackStackProvider;
 import com.fil.github_client.base.FragmentScreenView;
+import com.fil.github_client.base.RepositoryViewController;
+import com.fil.github_client.base.adapter.RecyclerAdapter;
+import com.fil.github_client.base.back_stack.BackStackProvider;
 import com.fil.github_client.model.GitRepository;
-import com.fil.github_client.network.ErrorResponseHandler;
-import com.fil.github_client.repository.github_repositories.GithubRepositoriesInteraction;
 import com.fil.github_client.screens.details.RepositoryDetailsFragment;
 import com.fil.github_client.screens.repositories.adapter.ReposItemViewHolder;
 import com.fil.github_client.screens.repositories.adapter.RepositoryAdapter;
@@ -52,18 +48,6 @@ public class RepositoriesFragment extends FragmentScreenView implements Reposito
 
     @InjectPresenter
     RepositoriesPresenter presenter;
-
-    @ProvidePresenter
-    RepositoriesPresenter provideRepositoriesPresenter() {
-        GithubRepositoriesInteraction repositoriesInteraction = new GithubRepositoriesInteraction(
-                MyApplication.getGithubRepositoriesRepository(),
-                new ErrorResponseHandler());
-
-        return new RepositoriesPresenter(
-                getContext(),
-                repositoriesInteraction,
-                MyApplication.getAppHelper());
-    }
 
     public static RepositoriesFragment newInstance(String login) {
         RepositoriesFragment fragment = new RepositoriesFragment();

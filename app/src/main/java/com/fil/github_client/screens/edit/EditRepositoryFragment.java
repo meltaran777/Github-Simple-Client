@@ -33,18 +33,6 @@ public class EditRepositoryFragment extends FragmentScreenView implements Reposi
     @InjectPresenter
     RepositoryEditPresenter presenter;
 
-    @ProvidePresenter
-    RepositoryEditPresenter providePresenter() {
-        GithubRepositoriesInteraction repositoriesInteractor = new GithubRepositoriesInteraction(
-                MyApplication.getGithubRepositoriesRepository(),
-                new ErrorResponseHandler());
-
-        return new RepositoryEditPresenter(
-                getContext(),
-                repositoriesInteractor,
-                MyApplication.getAppHelper());
-    }
-
     public static EditRepositoryFragment newInstance(GitRepository repository) {
         EditRepositoryFragment fragment = new EditRepositoryFragment();
         Bundle args = new Bundle();

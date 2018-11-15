@@ -3,27 +3,34 @@ package com.fil.github_client.screens.login;
 import android.content.Context;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
+import com.fil.github_client.MyApplication;
 import com.fil.github_client.R;
-import com.fil.github_client.base.presenter.BaseInteractionPresenter;
-import com.fil.github_client.helper.AppHelper;
+import com.fil.github_client.base.presenter.BasePresenter;
+import com.fil.github_client.helper.NetworkHelper;
 import com.fil.github_client.helper.ValidateHelper;
 import com.fil.github_client.model.User;
 import com.fil.github_client.repository.user.GithubUserInteraction;
 import com.fil.github_client.repository.user.GithubUserInteractionListener;
 
+import javax.inject.Inject;
+
 import static com.fil.github_client.base.ScreenView.SNACK_DURATION;
 
 @InjectViewState
-public class LoginPresenter
-        extends BaseInteractionPresenter<LoginView, GithubUserInteraction, GithubUserInteractionListener>
-        implements GithubUserInteractionListener {
+public class LoginPresenter extends BasePresenter<LoginView> implements GithubUserInteractionListener {
 
-    private ValidateHelper validateHelper;
+    @Inject ValidateHelper validateHelper;
+    @Inject NetworkHelper  networkHelper;
 
-    public LoginPresenter(Context context, GithubUserInteraction githubUserInteraction, AppHelper appHelper) {
-        super(context, githubUserInteraction, appHelper);
-        githubUserInteraction.setListener(this);
-        this.validateHelper = appHelper.getValidateHelper();
+    @Inject Context context;
+
+    @Inject GithubUserInteraction interaction;
+
+    public LoginPresenter() {
+        MyApplication.getAppComponent().inject(this);
+        interaction.setListener(this);
+        interaction.getErrorResponseHandler().subscribe(this);
     }
 
     public void login(String username, String password) {
@@ -49,6 +56,13 @@ public class LoginPresenter
         getViewState().hideProgress();
         getViewState().showRepositoriesView(user.getLogin());
         getViewState().hideView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        interaction.getErrorResponseHandler().unsubscribe(this);
+        interaction.destroy();
     }
 
     public boolean isValidForm(String login, String password) {

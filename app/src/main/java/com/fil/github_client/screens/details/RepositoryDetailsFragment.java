@@ -42,18 +42,6 @@ public class RepositoryDetailsFragment extends FragmentScreenView implements Rep
     @InjectPresenter
     public RepositoryDetailsPresenter presenter;
 
-    @ProvidePresenter
-    RepositoryDetailsPresenter providePresenter() {
-        GithubRepositoriesInteraction githubRepositoriesInteraction = new GithubRepositoriesInteraction(
-                MyApplication.getGithubRepositoriesRepository(),
-                new ErrorResponseHandler());
-
-        return new RepositoryDetailsPresenter(
-                getContext(),
-                githubRepositoriesInteraction,
-                MyApplication.getAppHelper());
-    }
-
     public static RepositoryDetailsFragment newInstance(GitRepository repository) {
         RepositoryDetailsFragment fragment = new RepositoryDetailsFragment();
         Bundle args = new Bundle();
