@@ -16,12 +16,9 @@ public abstract class BaseInteractionPresenter<V extends ScreenView, I extends B
 
     protected I interaction;
 
-    protected abstract L provideInteractionListener();
-
     public BaseInteractionPresenter(Context context, I interaction, AppHelper appHelper) {
         super(context, appHelper);
         this.interaction = interaction;
-        this.interaction.setListener(provideInteractionListener());
         interaction.getErrorResponseHandler().subscribe(this);
     }
 

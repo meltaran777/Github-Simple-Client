@@ -3,7 +3,7 @@ package com.fil.github_client.dialogs;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 
-public class BaseDialog extends DialogFragment {
+public abstract class BaseDialog extends DialogFragment {
 
     private boolean canShow = true;
 

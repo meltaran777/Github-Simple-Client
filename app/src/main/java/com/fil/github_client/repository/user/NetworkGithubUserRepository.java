@@ -16,7 +16,7 @@ public class NetworkGithubUserRepository extends NetworkGithubRepository impleme
     @Override
     public Observable<User> getUser(String login, String password) {
         final String authenticationToken =
-                appHelper.getNetworkHelper().getAuthenticationToken(login, password);
+                appHelper.getNetworkHelper().generateAuthenticationToken(login, password);
 
         githubApiClient.setAuthenticationToken(authenticationToken);
 

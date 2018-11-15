@@ -22,6 +22,7 @@ public class LoginPresenter
 
     public LoginPresenter(Context context, GithubUserInteraction githubUserInteraction, AppHelper appHelper) {
         super(context, githubUserInteraction, appHelper);
+        githubUserInteraction.setListener(this);
         this.validateHelper = appHelper.getValidateHelper();
     }
 
@@ -60,10 +61,5 @@ public class LoginPresenter
 
     private boolean isValidLogin(String login) {
         return validateHelper.isValidLogin(login);
-    }
-
-    @Override
-    protected GithubUserInteractionListener provideInteractionListener() {
-        return this;
     }
 }

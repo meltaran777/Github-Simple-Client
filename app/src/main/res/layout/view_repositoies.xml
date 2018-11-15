@@ -34,7 +34,6 @@
             android:orientation="horizontal" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-
     <ProgressBar
         android:id="@+id/recycler_progress_bar"
         style="?android:attr/progressBarStyle"

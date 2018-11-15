@@ -66,31 +66,8 @@ public abstract class ActivityScreenView extends MvpAppCompatActivity implements
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (resultCode) {
-            case Const.REPOSITORY_EDITED_RESULT_CODE:
-                onDataChanged(data);
-                break;
-        }
-    }
-
-    protected void onDataChanged(Intent data) {
-    }
-
-    @Override
-    public void hideView(int resultCode, Intent data) {
-        setViewResult(resultCode, data);
-        finish();
-    }
-
-    @Override
     public void hideView() {
         finish();
-    }
-
-    @Override
-    public void setViewResult(int resultCode, Intent data) {
-        setResult(resultCode, data);
     }
 
     @Override
@@ -99,6 +76,15 @@ public abstract class ActivityScreenView extends MvpAppCompatActivity implements
         if (supportActionBar != null) {
             supportActionBar.setDisplayHomeAsUpEnabled(true);
             supportActionBar.setHomeButtonEnabled(true);
+        }
+    }
+
+    @Override
+    public void disableBackButton() {
+        android.support.v7.app.ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setDisplayHomeAsUpEnabled(false);
+            supportActionBar.setHomeButtonEnabled(false);
         }
     }
 

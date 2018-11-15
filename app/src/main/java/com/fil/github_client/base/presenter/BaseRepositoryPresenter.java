@@ -2,6 +2,7 @@ package com.fil.github_client.base.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 
 import com.fil.github_client.helper.AppHelper;
 import com.fil.github_client.model.GitRepository;
@@ -20,10 +21,15 @@ public abstract class BaseRepositoryPresenter<V extends ScreenView>
 
     public BaseRepositoryPresenter(Context context, GithubRepositoriesInteraction githubRepositoriesInteraction, AppHelper appHelper) {
         super(context, githubRepositoriesInteraction, appHelper);
+        githubRepositoriesInteraction.setListener(this);
     }
 
     public void setGitRepository(Intent intent) {
         gitRepository = getReposItemFromIntent(intent);
+    }
+
+    public void setGitRepository(GitRepository gitRepository) {
+        this.gitRepository = gitRepository;
     }
 
     private GitRepository getReposItemFromIntent(Intent intent) {
@@ -32,6 +38,11 @@ public abstract class BaseRepositoryPresenter<V extends ScreenView>
 
     public GitRepository getGitRepository() {
         return gitRepository;
+    }
+
+    public Intent wrapRepositoryIntoIntent(GitRepository gitRepository) {
+        Intent data = new Intent();
+        return data.putExtra(Const.REPOSITORY_EXTRA_KEY, (Parcelable) gitRepository);
     }
 
     @Override
@@ -47,10 +58,5 @@ public abstract class BaseRepositoryPresenter<V extends ScreenView>
     @Override
     public void onRepositoryEdited(GitRepository newGitRepository) {
 
-    }
-
-    @Override
-    protected GithubRepositoriesInteractionListener provideInteractionListener() {
-        return this;
     }
 }

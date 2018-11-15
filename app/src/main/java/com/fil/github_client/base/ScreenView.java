@@ -22,11 +22,6 @@ public interface ScreenView extends MvpView, ToolbarView{
 
     void hideProgress();
 
-    @StateStrategyType(AddToEndSingleStrategy.class)
-    void setViewResult(int resultCode, Intent data);
-
-    void hideView(int resultCode, Intent data);
-
     void hideView();
 }
 

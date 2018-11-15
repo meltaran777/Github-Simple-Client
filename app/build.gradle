@@ -31,6 +31,7 @@ repositories {
 
 final support_version = "27.1.1"
 final moxy_version = "1.5.5"
+final dagger = '2.7'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -50,6 +51,11 @@ dependencies {
     annotationProcessor "com.arello-mobile:moxy-compiler:$moxy_version"
     implementation "com.arello-mobile:moxy-android:$moxy_version"
     implementation "com.arello-mobile:moxy-app-compat:$moxy_version"
+
+    //di
+    implementation "com.google.dagger:dagger:$dagger"
+    annotationProcessor 'com.squareup:javapoet:1.9.0'
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
 
     //rest
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'

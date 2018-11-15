@@ -9,12 +9,11 @@ import com.arellomobile.mvp.InjectViewState;
 import com.fil.github_client.R;
 import com.fil.github_client.helper.AppHelper;
 import com.fil.github_client.helper.image_loader.ImageLoader;
+import com.fil.github_client.helper.image_loader.Target;
 import com.fil.github_client.model.GitRepository;
 import com.fil.github_client.base.presenter.BaseRepositoryPresenter;
 import com.fil.github_client.repository.github_repositories.GithubRepositoriesInteraction;
-import com.fil.github_client.util.Const;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+
 
 @InjectViewState
 public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<RepositoryDetailsView> {
@@ -39,7 +38,6 @@ public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<Reposito
     }
 
     public void changeData(Intent data) {
-        getViewState().setViewResult(Const.REPOSITORY_EDITED_RESULT_CODE, data);
         setGitRepository(data);
         updateUi(gitRepository);
     }
@@ -48,14 +46,14 @@ public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<Reposito
         getViewState().showRepositoryEditView(getGitRepository());
     }
 
+    public void initToolbar(GitRepository gitRepository) {
+        getViewState().enableBackButton();
+        getViewState().setupTitle(gitRepository.getName());
+    }
+
     private void updateUi(GitRepository gitRepository) {
         initToolbar(gitRepository);
         initViews(gitRepository);
-    }
-
-    private void initToolbar(GitRepository gitRepository) {
-        getViewState().enableBackButton();
-        getViewState().setupTitle(gitRepository.getName());
     }
 
     private void initViews(GitRepository gitRepository) {
@@ -73,7 +71,7 @@ public class RepositoryDetailsPresenter extends BaseRepositoryPresenter<Reposito
     private void loadAvatarImage(GitRepository gitRepository) {
         imageLoader.loadImage(gitRepository.getOwner().getAvatarUrl(), new Target() {
             @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            public void onBitmapLoaded(Bitmap bitmap) {
                 getViewState().hideAvatarProgress();
                 getViewState().showOwnerAvatar(bitmap);
             }

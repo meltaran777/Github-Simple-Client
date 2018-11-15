@@ -2,7 +2,12 @@ package com.fil.github_client;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 
+import com.fil.github_client.di.AppComponent;
+import com.fil.github_client.di.DaggerAppComponent;
+import com.fil.github_client.di.modules.ContextModule;
 import com.fil.github_client.helper.AppHelper;
 import com.fil.github_client.helper.NetworkHelper;
 import com.fil.github_client.helper.RxHelper;
@@ -32,11 +37,17 @@ public class MyApplication extends Application {
     private static GithubUserRepository         githubUserRepository;
     private static GithubRepositoriesRepository githubRepositoriesRepository;
 
+    private static AppComponent sAppComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         context = this.getApplicationContext();
+
+        sAppComponent = DaggerAppComponent.builder()
+                .contextModule(new ContextModule(this))
+                .build();
 
         Timber.plant(new Timber.DebugTree());
 
@@ -83,5 +94,15 @@ public class MyApplication extends Application {
 
     public static ErrorResponseHandler getErrorResponseHandler() {
         return errorResponseHandler;
+    }
+
+    public static AppComponent getAppComponent() {
+        return sAppComponent;
+    }
+
+
+    @VisibleForTesting
+    public static void setAppComponent(@NonNull AppComponent appComponent) {
+        sAppComponent = appComponent;
     }
 }

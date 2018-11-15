@@ -18,19 +18,28 @@ import static com.fil.github_client.base.ScreenView.SNACK_DURATION;
 @InjectViewState
 public class RepositoryEditPresenter extends BaseRepositoryPresenter<RepositoryEditView> {
 
+    private boolean isViewCreated = false;
+
     public RepositoryEditPresenter(Context context,
                                    GithubRepositoriesInteraction repositoriesInteraction,
                                    AppHelper appHelper) {
         super(context, repositoriesInteraction, appHelper);
     }
 
-    public void initUi() {
-        getViewState().enableBackButton();
-        getViewState().setupTitle(gitRepository.getName());
-        initUi(gitRepository);
+    public void init(GitRepository gitRepository) {
+        if (!isViewCreated){
+            setGitRepository(gitRepository);
+
+            getViewState().enableBackButton();
+            getViewState().setupTitle(gitRepository.getName());
+
+            initViews(gitRepository);
+
+            isViewCreated = true;
+        }
     }
 
-    private void initUi(GitRepository gitRepository) {
+    private void initViews(GitRepository gitRepository) {
         getViewState().showRepositoryName(gitRepository.getName());
         getViewState().showRepositoryDescription(gitRepository.getDescription());
     }

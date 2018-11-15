@@ -1,18 +1,12 @@
 package com.fil.github_client.base;
 
-import android.support.annotation.StringRes;
+import android.content.Intent;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(OneExecutionStateStrategy.class)
-public interface ToolbarView extends MvpView {
-    void setupTitle(String title);
-
-    void setupTitle(@StringRes int resId);
-
-    void enableBackButton();
-
-    void disableBackButton();
+public interface ResultView extends MvpView {
+    void setViewResult(int resultCode, Intent data);
 }

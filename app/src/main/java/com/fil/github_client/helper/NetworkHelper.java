@@ -22,7 +22,7 @@ public class NetworkHelper {
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
-    public String getAuthenticationToken(final String username, final String password) {
+    public String generateAuthenticationToken(final String username, final String password) {
         return Base64.encodeToString((username + A_COLON + password).getBytes(), Base64.DEFAULT).replace(NEW_LINE, EMPTY_STR);
     }
 }

@@ -1,31 +1,29 @@
 package com.fil.github_client.screens.repositories.adapter;
 
 import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.fil.github_client.R;
+import com.fil.github_client.base.adapter.RecyclerAdapter;
 import com.fil.github_client.model.GitRepository;
 
 import java.util.List;
 
-public class RepositoryAdapter extends RecyclerView.Adapter<ReposItemViewHolder> {
-
-    private List<GitRepository> values;
+public class RepositoryAdapter extends RecyclerAdapter<GitRepository, ReposItemViewHolder> {
 
     private RepositoryListItemInteractionListener listener;
 
-    public RepositoryAdapter(List<GitRepository> data, RepositoryListItemInteractionListener listener) {
+    public RepositoryAdapter(List<GitRepository> values, RepositoryListItemInteractionListener listener) {
+        super(values);
         this.listener = listener;
-        values = data;
     }
 
     @Override
     public ReposItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.repo_recycler_item, parent, false);
+        View v = inflater.inflate(R.layout.repository_recycler_item, parent, false);
         ReposItemViewHolder vh = new ReposItemViewHolder(v);
         return vh;
     }
@@ -41,25 +39,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<ReposItemViewHolder>
         return values.size();
     }
 
-
-    public void add(int position, GitRepository item) {
-        values.add(position, item);
-        notifyItemInserted(position);
-    }
-
-
-    public void remove(int position) {
-        values.remove(position);
-        notifyItemRemoved(position);
-    }
-
-
-    public void update(int position, GitRepository gitRepository) {
-        values.set(position, gitRepository);
-        notifyItemChanged(position);
-    }
-
-    public void setValues(List<GitRepository> newValues){
+    @Override
+    public void setValues(List<GitRepository> newValues) {
         RepositoryDiffUtilCallback repositoryDiffUtilCallback = new RepositoryDiffUtilCallback(values, newValues);
         DiffUtil.DiffResult repositoryDiffResult = DiffUtil.calculateDiff(repositoryDiffUtilCallback);
         values = newValues;

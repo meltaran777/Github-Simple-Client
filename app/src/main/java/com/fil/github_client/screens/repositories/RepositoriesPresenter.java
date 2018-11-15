@@ -57,6 +57,12 @@ public class RepositoriesPresenter
         }
     }
 
+    public void setLogin(Intent intent) {
+        this.login = intent.getStringExtra(Const.LOGIN_EXTRA_KEY);
+        getViewState().setupTitle(context.getString(R.string.repos_activity_title, login));
+        getViewState().disableBackButton();
+    }
+
     @Override
     public void onRepositoriesLoaded(List<GitRepository> repositories) {
         data = repositories;
@@ -88,11 +94,6 @@ public class RepositoriesPresenter
         } else {
             getViewState().showSnackbar(context.getString(R.string.no_internet_message), SNACK_DURATION);
         }
-    }
-
-    public void setLogin(Intent intent) {
-        this.login = intent.getStringExtra(Const.LOGIN_EXTRA_KEY);
-        getViewState().setupTitle(context.getString(R.string.repos_activity_title, login));
     }
 
     public List<GitRepository> getData() {

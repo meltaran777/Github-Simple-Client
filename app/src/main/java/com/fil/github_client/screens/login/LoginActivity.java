@@ -16,11 +16,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.fil.github_client.MyApplication;
 import com.fil.github_client.R;
+import com.fil.github_client.activity.MainActivity;
 import com.fil.github_client.base.ActivityScreenView;
 import com.fil.github_client.helper.AppHelper;
 import com.fil.github_client.network.ErrorResponseHandler;
 import com.fil.github_client.repository.user.GithubUserInteraction;
-import com.fil.github_client.screens.repositories.RepositoriesActivity;
 import com.fil.github_client.util.Const;
 
 public class LoginActivity extends ActivityScreenView implements LoginView {
@@ -47,7 +47,7 @@ public class LoginActivity extends ActivityScreenView implements LoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.view_login);
 
         setupTitle(getString(R.string.login_activity_title_text));
 
@@ -93,9 +93,10 @@ public class LoginActivity extends ActivityScreenView implements LoginView {
 
     @Override
     public void showRepositoriesView(String login) {
-        Intent intent = new Intent(this, RepositoriesActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(Const.LOGIN_EXTRA_KEY, login);
-        startActivityForResult(intent, Const.REPOSITORY_ACTIVITY_REQUEST_CODE);
+        startActivity(intent);
     }
 
     @Override
