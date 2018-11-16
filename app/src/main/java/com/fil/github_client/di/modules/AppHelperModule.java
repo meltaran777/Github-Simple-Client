@@ -7,7 +7,6 @@ import com.fil.github_client.helper.StringHelper;
 import com.fil.github_client.helper.ValidateHelper;
 import com.fil.github_client.helper.image_loader.ImageLoader;
 import com.fil.github_client.helper.image_loader.PicassoImageLoader;
-import com.fil.github_client.network.ErrorResponseHandler;
 
 import javax.inject.Singleton;
 

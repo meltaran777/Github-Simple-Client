@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.fil.github_client.screens.repositories.RepositoriesFragment;
-
 import java.io.Serializable;
 import java.util.Deque;
 import java.util.LinkedList;

@@ -70,7 +70,6 @@ public class GithubApiClient {
                 e.printStackTrace();
             }
         }
-
         return chain.proceed(chain.request());
     }
 
