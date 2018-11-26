@@ -97,7 +97,7 @@ public class RepositoryDetailsFragment extends FragmentScreenView implements Rep
     }
 
     @Override
-    public void onDataChanged(Intent data) {
+    public void onRepositoryEdited(Intent data) {
         presenter.changeData(data);
     }
 

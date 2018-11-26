@@ -15,15 +15,17 @@ public abstract class BaseRepositoryPresenter<V extends ScreenView>
 
     protected GitRepository gitRepository;
 
+
     public BaseRepositoryPresenter() {
+    }
+
+
+    public void setGitRepository(GitRepository gitRepository) {
+        this.gitRepository = gitRepository;
     }
 
     public void setGitRepository(Intent intent) {
         gitRepository = getReposItemFromIntent(intent);
-    }
-
-    public void setGitRepository(GitRepository gitRepository) {
-        this.gitRepository = gitRepository;
     }
 
     private GitRepository getReposItemFromIntent(Intent intent) {

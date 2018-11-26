@@ -39,9 +39,9 @@ public class MainActivity extends BackStackActivity implements RepositoryViewCon
     }
 
     @Override
-    public void onDataChanged(Intent data) {
+    public void onRepositoryEdited(Intent data) {
         if (repositoriesFragment instanceof RepositoryViewController){
-            ((RepositoryViewController) repositoriesFragment).onDataChanged(data);
+            ((RepositoryViewController) repositoriesFragment).onRepositoryEdited(data);
         }
     }
 

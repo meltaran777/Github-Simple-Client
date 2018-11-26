@@ -106,10 +106,10 @@ public class RepositoriesFragment extends FragmentScreenView implements Reposito
     }
 
     @Override
-    public void onDataChanged(Intent data) {
+    public void onRepositoryEdited(Intent data) {
         presenter.updateItem(data);
         if (repositoryDetailsFragment instanceof RepositoryViewController) {
-            ((RepositoryViewController) repositoryDetailsFragment).onDataChanged(data);
+            ((RepositoryViewController) repositoryDetailsFragment).onRepositoryEdited(data);
         }
     }
 

@@ -66,7 +66,7 @@ public class LoginPresenter extends BasePresenter<LoginView> implements GithubUs
     }
 
     public boolean isValidForm(String login, String password) {
-        return isValidPassword(login) && isValidLogin(password);
+        return isValidPassword(password) && isValidLogin(login);
     }
 
     private boolean isValidPassword(String password) {

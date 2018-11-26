@@ -41,11 +41,6 @@ public class RepositoriesPresenter extends BaseRepositoryPresenter<RepositoriesV
         data = new ArrayList<>();
     }
 
-    public void updateItem(Intent data) {
-        setGitRepository(data);
-        getViewState().updateItem(gitRepository, openItemPosition);
-    }
-
     public void loadRepositories() {
         if (!isDataLoaded()) {
             loadData();
@@ -63,6 +58,11 @@ public class RepositoriesPresenter extends BaseRepositoryPresenter<RepositoriesV
         } else {
             getViewState().showSnackbar(context.getString(R.string.no_internet_message), SNACK_DURATION);
         }
+    }
+
+    public void updateItem(Intent data) {
+        setGitRepository(data);
+        getViewState().updateItem(gitRepository, openItemPosition);
     }
 
     public void setLogin(Intent intent) {
