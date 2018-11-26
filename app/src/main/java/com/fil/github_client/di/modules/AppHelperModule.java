@@ -24,37 +24,36 @@ public class AppHelperModule {
                                       ValidateHelper validateHelper,
                                       StringHelper stringHelper,
                                       ImageLoader imageLoader) {
-        return new AppHelper(rxHelper,networkHelper,validateHelper,
-                stringHelper,imageLoader);
+        return new AppHelper(rxHelper, networkHelper, validateHelper, stringHelper, imageLoader);
     }
 
     @Provides
     @Singleton
-    public RxHelper provideRxHelper(){
+    public RxHelper provideRxHelper() {
         return new RxHelper(Schedulers.io(), AndroidSchedulers.mainThread());
     }
 
     @Provides
     @Singleton
-    public NetworkHelper provideNetworkHelper(){
+    public NetworkHelper provideNetworkHelper() {
         return new NetworkHelper();
     }
 
     @Provides
     @Singleton
-    public ValidateHelper provideValidateHelper(){
+    public ValidateHelper provideValidateHelper() {
         return new ValidateHelper();
     }
 
     @Provides
     @Singleton
-    public StringHelper provideStringHelper(){
+    public StringHelper provideStringHelper() {
         return new StringHelper();
     }
 
     @Provides
     @Singleton
-    public ImageLoader provideImageLoader(){
+    public ImageLoader provideImageLoader() {
         return new PicassoImageLoader();
     }
 }

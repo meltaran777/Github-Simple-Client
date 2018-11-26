@@ -24,16 +24,6 @@ public abstract class BackStackActivity extends ActivityScreenView implements Ba
         }
     }
 
-    @Override
-    public BackStackManager getBackStackManager() {
-        return presenter.getBackStackManager();
-    }
-
-    @Override
-    public void onBackPressed() {
-        presenter.getBackStackManager().onBackPressed();
-    }
-
     private void createBackStackManager() {
         if (presenter.getBackStackManager() == null) {
             presenter.setBackStackManager(new BackStackManager(new BackStackListener() {
@@ -48,5 +38,15 @@ public abstract class BackStackActivity extends ActivityScreenView implements Ba
                 }
             }, getSupportFragmentManager()));
         }
+    }
+
+    @Override
+    public BackStackManager getBackStackManager() {
+        return presenter.getBackStackManager();
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.getBackStackManager().onBackPressed();
     }
 }

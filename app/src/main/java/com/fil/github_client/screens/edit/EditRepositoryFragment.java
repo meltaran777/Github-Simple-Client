@@ -13,14 +13,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.fil.github_client.MyApplication;
 import com.fil.github_client.R;
 import com.fil.github_client.base.FragmentScreenView;
 import com.fil.github_client.base.RepositoryViewController;
 import com.fil.github_client.model.GitRepository;
-import com.fil.github_client.network.ErrorResponseHandler;
-import com.fil.github_client.repository.github_repositories.GithubRepositoriesInteraction;
 import com.fil.github_client.util.Const;
 
 public class EditRepositoryFragment extends FragmentScreenView implements RepositoryEditView {
@@ -68,7 +64,7 @@ public class EditRepositoryFragment extends FragmentScreenView implements Reposi
     public void setViewResult(int resultCode, Intent data) {
         if (resultCode == Const.REPOSITORY_EDITED_RESULT_CODE) {
             if (getActivity() instanceof RepositoryViewController) {
-                ((RepositoryViewController) getActivity()).onDataChanged(data);
+                ((RepositoryViewController) getActivity()).onRepositoryEdited(data);
             }
         }
     }
